@@ -94,11 +94,21 @@ public class Addressbooksystem {
 
         Addressbooksystem.address_book.set(index, contact);
     }
+    public void deleteExistingContact(){
+        System.out.println("Enter the name of the person whose details you "
+                + "want to be deleted");
+        Scanner sc = new Scanner(System.in);
+        String search_pers = sc.next();
+        // Fetch the index of person in address book
+        int index = searchExistingContact(search_pers);
+        // delete the details of person
+        Addressbooksystem.address_book.remove(index);
+    }
     public static void main(String []args) {
         System.out.println("Welcome to Address Book Program!");
         Addressbooksystem addressbook = new Addressbooksystem();
         addressbook.enterContactDetails();
-        addressbook.editExistingContact();
+        addressbook.deleteExistingContact();
 
     }
 
