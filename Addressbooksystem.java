@@ -20,7 +20,7 @@ public class Addressbooksystem {
         ArrayList <String> contact = enterContactDetails();
         createContacts(contact);
     }
-    // Asks to enter all the details of person
+
     public ArrayList enterContactDetails(){
         ArrayList <String> contact = new ArrayList <String>();
 
@@ -66,10 +66,40 @@ public class Addressbooksystem {
 
         return contact;
     }
+    public int searchExistingContact(String search_pers){
+        int indx = -1;
+        int temp_indx = -1;
+        for (ArrayList <String> i:Addressbooksystem.address_book){
+
+            temp_indx ++;
+            for (String j:i){
+
+                if (j.equals(search_pers)){
+                    indx = temp_indx;
+                    break;
+                }
+            }
+        }
+        return indx;
+    }
+    public void editExistingContact(){
+        System.out.println("Enter the name of the person whose details you "
+                + "want to be changed");
+        Scanner sc = new Scanner(System.in);
+        String search_pers = sc.next();
+        int index = searchExistingContact(search_pers);
+        System.out.println("Found the name, Kindly enter new details ");
+
+        ArrayList <String> contact = enterContactDetails();
+
+        Addressbooksystem.address_book.set(index, contact);
+    }
     public static void main(String []args) {
         System.out.println("Welcome to Address Book Program!");
         Addressbooksystem addressbook = new Addressbooksystem();
         addressbook.enterContactDetails();
+        addressbook.editExistingContact();
+
     }
 
 }
