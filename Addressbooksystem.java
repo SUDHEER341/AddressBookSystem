@@ -1,8 +1,8 @@
 package com.addressbooksystem;
 import java.util.Scanner;
 import java.util.ArrayList;
-
 public class Addressbooksystem {
+
     private static final ArrayList<ArrayList<String>> address_book = new ArrayList<>();
 
     public void createContacts(ArrayList<String> contact) {
@@ -20,7 +20,6 @@ public class Addressbooksystem {
         ArrayList <String> contact = enterContactDetails();
         createContacts(contact);
     }
-
     public ArrayList enterContactDetails(){
         ArrayList <String> contact = new ArrayList <String>();
 
@@ -70,10 +69,10 @@ public class Addressbooksystem {
         int indx = -1;
         int temp_indx = -1;
         for (ArrayList <String> i:Addressbooksystem.address_book){
-
+            // find index of arraylist in which the given name is there
             temp_indx ++;
             for (String j:i){
-
+                // if name is found
                 if (j.equals(search_pers)){
                     indx = temp_indx;
                     break;
@@ -89,9 +88,7 @@ public class Addressbooksystem {
         String search_pers = sc.next();
         int index = searchExistingContact(search_pers);
         System.out.println("Found the name, Kindly enter new details ");
-
         ArrayList <String> contact = enterContactDetails();
-
         Addressbooksystem.address_book.set(index, contact);
     }
     public void deleteExistingContact(){
@@ -99,17 +96,32 @@ public class Addressbooksystem {
                 + "want to be deleted");
         Scanner sc = new Scanner(System.in);
         String search_pers = sc.next();
-        // Fetch the index of person in address book
+
         int index = searchExistingContact(search_pers);
-        // delete the details of person
+
         Addressbooksystem.address_book.remove(index);
+    }
+
+    public void addMultiplePerson(){
+
+        System.out.println("Enter the number of persons whose details you want " + "to add to the address book");
+
+        Scanner sc = new Scanner(System.in);
+
+        int no_of_person = sc.nextInt();
+
+        for (int i=1;i<=no_of_person;i++){
+            addContact();
+
+        }
+
     }
     public static void main(String []args) {
         System.out.println("Welcome to Address Book Program!");
         Addressbooksystem addressbook = new Addressbooksystem();
         addressbook.enterContactDetails();
+        addressbook.editExistingContact();
         addressbook.deleteExistingContact();
-
+        addressbook.addMultiplePerson();
     }
-
 }
